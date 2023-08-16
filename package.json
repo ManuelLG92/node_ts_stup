@@ -1,0 +1,32 @@
+{
+	"name": "node-express-ts",
+	"version": "1.0.0",
+	"description": "node-express-ts playground",
+	"scripts": {
+		"eslint:fix": "eslint --fix --ext .ts --config .eslintrc src && eslint --fix --ext .ts --config .eslintrc qa",
+		"prettier:fix": "prettier --write .",
+		"prebuild": "rm -rf dist",
+		"build": "npm run prebuild && npx tsc",
+		"start": "npm run build && node dist/index.js",
+		"dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\""
+	},
+	"author": "Manuel Leon",
+	"license": "ISC",
+	"dependencies": {
+		"dotenv": "^16.3.1",
+		"express": "^4.18.2",
+		"pino-http": "^8.4.0"
+	},
+	"devDependencies": {
+		"@types/express": "^4.17.17",
+		"@types/node": "^20.5.0",
+		"@typescript-eslint/eslint-plugin": "^6.3.0",
+		"@typescript-eslint/parser": "^6.3.0",
+		"concurrently": "^8.2.0",
+		"eslint": "^8.47.0",
+		"eslint-config-prettier": "^9.0.0",
+		"nodemon": "^3.0.1",
+		"prettier": "^3.0.1",
+		"typescript": "^5.1.6"
+	}
+}
