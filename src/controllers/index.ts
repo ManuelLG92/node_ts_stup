@@ -1,4 +1,5 @@
-import { Request, Response, Router } from 'express';
+import { NextFunction, Request, Response, Router } from 'express';
+import { PostController } from './post/postController';
 
 const controllerRouter = Router();
 controllerRouter
@@ -6,9 +7,11 @@ controllerRouter
 	.get((req: Request, res: Response) => {
 		res.send('Express + TypeScript Server');
 	})
-	.post((req: Request, res: Response) => {
-		console.log(`body: ${JSON.stringify(req.body)}`);
-		res.json({ data: req.body });
+	.post(async (req: Request, res: Response, next: NextFunction) => {
+		const instance = new PostController();
+		return Promise.resolve(instance.execute(req, res))
+			.then((r) => r)
+			.catch((e) => next(e));
 	});
 
 export default controllerRouter;
