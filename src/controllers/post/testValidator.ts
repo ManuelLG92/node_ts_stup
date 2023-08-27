@@ -1,7 +1,8 @@
-import Joi from 'joi';
+import { z } from 'zod';
 
-export const testSchema = Joi.object({
-	username: Joi.string().alphanum().min(3).max(30).required(),
-
-	age: Joi.number().integer().min(18).max(65).required(),
-}).options({ abortEarly: false });
+export const testSchema = z
+	.object({
+		username: z.string().min(3).max(30),
+		age: z.number().min(18).max(65),
+	})
+	.required();

@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { Request } from 'express';
-import Joi from 'joi';
 import { UnprocessableEntity } from '../../errors/unprocessableEntity';
+import { z } from 'zod';
 
 export enum ValidationKeys {
 	QUERY = 'query',
@@ -15,7 +15,7 @@ const MetadataValidationKeys = {
 
 function validationFactory(
 	metadataKey: symbol,
-	model: Joi.Schema,
+	model: z.Schema,
 	source: ValidationKeys,
 ): any {
 	return function (
@@ -33,12 +33,12 @@ function validationFactory(
 				propertyName,
 			);
 			const [req] = args as unknown as any;
-			const { error } = (model as Joi.Schema).validate(
+			const result = (model as z.Schema).safeParse(
 				(req as Request)[source],
 			);
-			if (error) {
+			if (!result.success) {
 				throw new UnprocessableEntity(
-					error.details.map((item) => ({
+					result.error.errors.map((item) => ({
 						[item.path.join(', ')]: item.message,
 					})),
 				);
@@ -48,7 +48,7 @@ function validationFactory(
 	};
 }
 
-export const ValidateQuery = (dto: Joi.Schema) =>
+export const ValidateQuery = (dto: z.Schema) =>
 	validationFactory(MetadataValidationKeys.QUERY, dto, ValidationKeys.QUERY);
-export const ValidateBody = (dto: Joi.Schema) =>
+export const ValidateBody = (dto: z.Schema) =>
 	validationFactory(MetadataValidationKeys.BODY, dto, ValidationKeys.BODY);

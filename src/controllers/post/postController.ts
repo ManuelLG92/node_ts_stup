@@ -6,8 +6,8 @@ import { BaseController } from '../baseController';
 export class PostController extends BaseController {
 	@ValidateBody(testSchema)
 	async execute(req: Request, res: Response) {
-		const { body } = req;
-		console.log('here...', body, 'dto');
-		return res.status(200).json({ body });
+		const { body: dto }: { body: Zod.infer<typeof testSchema> } = req;
+		console.log('dto', dto);
+		return res.status(200).json({ dto });
 	}
 }
