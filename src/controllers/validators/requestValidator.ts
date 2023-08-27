@@ -44,7 +44,7 @@ function validationFactory(
 			if (!result.success) {
 				throw new UnprocessableEntity(
 					result.error.errors.map((item) => ({
-						[item.path.join(', ')]: item.message,
+						[item.path.join('.')]: item.message,
 					})),
 				);
 			}
