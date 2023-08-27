@@ -13,6 +13,9 @@ const MetadataValidationKeys = {
 	BODY: Symbol('validate-body'),
 };
 
+type CallbackFunction = () => void;
+type CallbackFunctionVariadicAnyReturn = (...args: any[]) => any;
+
 function validationFactory(
 	metadataKey: symbol,
 	model: z.Schema,
@@ -21,11 +24,13 @@ function validationFactory(
 	return function (
 		target: any,
 		propertyName: string,
-		descriptor: TypedPropertyDescriptor<Function>,
+		descriptor: TypedPropertyDescriptor<
+			CallbackFunction | CallbackFunctionVariadicAnyReturn
+		>,
 	) {
 		Reflect.defineMetadata(metadataKey, model, target, propertyName);
 
-		const method = descriptor.value as Function;
+		const method = descriptor.value as CallbackFunctionVariadicAnyReturn;
 		descriptor.value = async function (...args: any) {
 			const model = Reflect.getOwnMetadata(
 				metadataKey,
