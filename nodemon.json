@@ -1,0 +1,6 @@
+{
+	"exec": "npm run start",
+	"ext": ".ts,.json",
+	"signal": "SIGINT",
+	"watch": ["src"]
+}

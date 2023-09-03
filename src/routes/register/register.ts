@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { routes } from '..';
+import { routes } from 'src/routes';
 
 const registerRoutes = (router: Router) => {
 	routes.forEach((route) => {

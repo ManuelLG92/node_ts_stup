@@ -8,6 +8,6 @@ export class PostController extends BaseController {
 	async execute(req: Request, res: Response) {
 		const { body: dto }: { body: Zod.infer<typeof postDtoSchema> } = req;
 		console.log('dto', dto);
-		return res.status(200).json({ dto });
+		return res.status(200).json({ ...dto });
 	}
 }

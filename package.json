@@ -8,7 +8,7 @@
 		"prebuild": "rm -rf dist",
 		"build": "npm run prebuild && npx tsc && tsc-alias",
 		"start": "npm run build && node dist/index.js",
-		"dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/src/index.js\"",
+		"dev": "npx nodemon",
 		"prepare": "husky install",
 		"precommit": "npm run eslint:fix && npm run prettier:fix"
 	},
@@ -19,11 +19,13 @@
 		"express": "^4.18.2",
 		"pino-http": "^8.4.0",
 		"reflect-metadata": "^0.1.13",
+		"remove": "^0.1.5",
+		"tslib": "^2.6.2",
 		"zod": "^3.22.2"
 	},
 	"devDependencies": {
 		"@types/express": "^4.17.17",
-		"@types/node": "^20.5.0",
+		"@types/node": "^20.5.9",
 		"@typescript-eslint/eslint-plugin": "^6.3.0",
 		"@typescript-eslint/parser": "^6.3.0",
 		"concurrently": "^8.2.0",
@@ -32,7 +34,6 @@
 		"husky": "^8.0.0",
 		"nodemon": "^3.0.1",
 		"prettier": "^3.0.1",
-		"ts-node": "^10.9.1",
 		"tsc-alias": "^1.8.7",
 		"typescript": "^5.1.6"
 	}

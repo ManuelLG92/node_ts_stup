@@ -10,7 +10,7 @@ import { pinoHttp } from 'pino-http';
 import authMiddleware from 'src/middlewares/authMiddleware';
 import { UnprocessableEntity } from 'src/errors/unprocessableEntity';
 import { BaseError } from 'src/errors/baseError';
-import registerRoutes from 'src/routes/export/register';
+import registerRoutes from 'src/routes/register/register';
 dotenv.config();
 
 const app: Express = express();
