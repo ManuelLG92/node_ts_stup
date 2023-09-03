@@ -1,11 +1,16 @@
-import express, { Express, NextFunction, Request, Response } from 'express';
+import express, {
+	Express,
+	NextFunction,
+	Request,
+	Response,
+	Router,
+} from 'express';
 import dotenv from 'dotenv';
 import { pinoHttp } from 'pino-http';
-import controllerRouter from './controllers';
-import authMiddleware from './middlewares/authMiddleware';
-import { UnprocessableEntity } from './errors/unprocessableEntity';
-import { BaseError } from './errors/baseError';
-
+import authMiddleware from 'src/middlewares/authMiddleware';
+import { UnprocessableEntity } from 'src/errors/unprocessableEntity';
+import { BaseError } from 'src/errors/baseError';
+import registerRoutes from 'src/routes/export/register';
 dotenv.config();
 
 const app: Express = express();
@@ -15,7 +20,9 @@ app.use(express.json());
 app.use(pinoHttp());
 app.use(authMiddleware);
 
-app.use('/', controllerRouter);
+const router = Router();
+registerRoutes(router);
+app.use(router);
 
 app.use((err: BaseError, req: Request, res: Response, next: NextFunction) => {
 	console.log(err.stack);

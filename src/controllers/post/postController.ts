@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
-import { ValidateBody } from '../validators/requestValidator';
-import { postDtoSchema } from './postDtoSchema';
-import { BaseController } from '../baseController';
+import { ValidateBody } from 'src/controllers/validators/requestValidator';
+import { postDtoSchema } from 'src/controllers/post/postDtoSchema';
+import { BaseController } from 'src/controllers/baseController';
 
 export class PostController extends BaseController {
 	@ValidateBody(postDtoSchema)

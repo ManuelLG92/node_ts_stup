@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response, Router } from 'express';
-import { PostController } from './post/postController';
+import { PostController } from 'src/controllers/post/postController';
 
 const controllerRouter = Router();
 controllerRouter

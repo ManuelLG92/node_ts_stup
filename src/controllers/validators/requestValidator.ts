@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import { Request } from 'express';
-import { UnprocessableEntity } from '../../errors/unprocessableEntity';
+import { UnprocessableEntity } from 'src/errors/unprocessableEntity';
 import { z } from 'zod';
 
 export enum ValidationKeys {
@@ -41,6 +41,7 @@ function validationFactory(
 			const result = (model as z.Schema).safeParse(
 				(req as Request)[source],
 			);
+
 			if (!result.success) {
 				throw new UnprocessableEntity(
 					result.error.errors.map((item) => ({
