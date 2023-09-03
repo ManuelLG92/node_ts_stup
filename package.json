@@ -10,7 +10,8 @@
 		"start": "npm run build && node dist/index.js",
 		"dev": "npx nodemon",
 		"prepare": "husky install",
-		"precommit": "npm run eslint:fix && npm run prettier:fix"
+		"precommit": "npm run eslint:fix && npm run prettier:fix",
+		"watch": "ts-node-dev --files -r tsconfig-paths/register src/index.ts"
 	},
 	"author": "Manuel Leon",
 	"license": "ISC",
@@ -34,7 +35,9 @@
 		"husky": "^8.0.0",
 		"nodemon": "^3.0.1",
 		"prettier": "^3.0.1",
+		"ts-node-dev": "^2.0.0",
 		"tsc-alias": "^1.8.7",
+		"tsconfig-paths": "^4.2.0",
 		"typescript": "^5.1.6"
 	}
 }
